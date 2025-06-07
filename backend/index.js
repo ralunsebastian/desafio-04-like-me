@@ -1,12 +1,16 @@
 const express = require('express');
 const cors = require('cors');
+const routes = require('./routes/routes.js');
+const { obtenerPosts, insertarPost, darLike, eliminarPost } = require('./consultas');
+
 const app = express();
 const port = 3000;
 
-const { obtenerPosts, insertarPost, darLike, eliminarPost } = require('./consultas');
-
 app.use(cors());
 app.use(express.json());
+
+// Montas las rutas
+app.use('/api', routes);
 
 app.get('/posts', async (req, res) => {
   try {
